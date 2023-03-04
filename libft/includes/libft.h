@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:43:42 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/03/03 19:19:52 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/03/04 20:58:09 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char			*get_next_line(int fd);
 char			*ft_next(char *buffer);
 char			*ft_line(char *buffer);
 char			*ft_read(int fd, char *buffer);
-char			*ft_tmp(char *tmp, char *buffer);
+char			*ft_tmp(char *buffer);
 int				ft_strchr_gnl(char *str, char c);
 char			*ft_strjoin_gnl(char *s1, char *s2);
 

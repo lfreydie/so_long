@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 09:55:59 by lefreydier        #+#    #+#             */
-/*   Updated: 2023/03/03 17:02:14 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/03/04 21:00:13 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 
 	i = 0;
 	len_tot = ft_strlen(s1) + ft_strlen(s2);
+	if (!s1 || !s2)
+		return (NULL);
 	new = (char *)malloc((len_tot + 1) * sizeof(char));
-	if (!new || !s1 || !s2)
+	if (!new)
 		return (NULL);
 	while (s1[i])
 	{

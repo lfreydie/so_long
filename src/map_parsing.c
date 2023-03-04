@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:31:41 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/03/03 19:45:08 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/03/04 20:49:20 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ t_infos	*check_map(char *file)
 		put_error(ERR_MAP, NULL, 1, infos);
 	check_map_shape(infos);
 	check_map_border(infos);
-	check_map_char(infos);
+	check_map_char(infos, 0, 0, 0);
+	check_map_path(infos);
 	show_infos(infos);
-	// check_map_path(map);
 	return (infos);
 }
 
@@ -95,7 +95,7 @@ void	check_map_border(t_infos *infos)
 	}
 }
 
-void	check_map_char(t_infos *infos)
+void	check_map_char(t_infos *infos, int count_c, int count_p, int count_e)
 {
 	int	x;
 	int	y;
@@ -107,14 +107,17 @@ void	check_map_char(t_infos *infos)
 		while (infos->map[y][x])
 		{
 			if (infos->map[y][x] == 'C')
-
+				count_c++;
 			if (infos->map[y][x] == 'P')
-
+				count_p += take_coordinate_perso(infos, x, y);
 			if (infos->map[y][x] == 'E')
-
+				count_e++;
 			x++;
 		}
 		y++;
 	}
-	// count C, P, E
+	if (count_c < 1)
+		put_error(ERR_MAP, "not enough collectibles\n", 1, infos);
+	else if (count_p != 1 || count_e != 1)
+		put_error(ERR_MAP, "map contains duplicates\n", 1, infos);
 }

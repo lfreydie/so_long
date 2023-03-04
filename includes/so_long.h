@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:26:52 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/03/03 19:40:05 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/03/04 19:11:07 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,29 @@
 # include <math.h>
 # include <time.h>
 
-typedef struct s_position
-{
-	int					x;
-	int					y;
-	struct s_position	*next;
-}	t_position;
-
 typedef struct s_infos
 {
 	char		**map;
+	int			x_p;
+	int			y_p;
 	int			x_max;
 	int			y_max;
-	t_position	*perso;
-	t_position	*collect;
-	t_position	*exit;
+	int			collect;
 }	t_infos;
 
 # define ERROR 1
 # define SUCCESS 0
-# define ERR_ARG "Invalid number of arguments"
-# define ERR_ENV "Environnement error"
-# define ERR_MAP "Map error"
+# define ERR "Error\n"
+# define ERR_ARG "Error\nInvalid number of arguments"
+# define ERR_ENV "Error\nEnvironnement error"
+# define ERR_MAP "Error\nMap error"
 
 //	MAP PARSING
 t_infos	*check_map(char *file);
 void	check_file_name(char *file);
 void	check_map_shape(t_infos *infos);
 void	check_map_border(t_infos *infos);
-void	check_map_char(t_infos *infos);
+void	check_map_char(t_infos *infos, int count_c, int count_p, int count_e);
 
 //	CREATE MAP
 char	**fill_map(int fd, char *file);
@@ -58,18 +52,23 @@ int		ft_count_line(int fd);
 
 //	INIT
 t_infos	*init_infos(void);
+int		take_coordinate_perso(t_infos *infos, int x, int y);
+
+//	PATH_VALIDITY
+void	check_map_path(t_infos *infos);
+char	**ft_map_dup(t_infos *infos);
+int		try_paths(char **map_dup, int x, int y);
+int		check_exit_possible(char **map);
 
 //	FREE
 void	free_all(t_infos *infos);
-void	free_position(t_position *lst);
 void	free_map(char **map);
 
 //	ERROR
-void	put_error(char *error, char *file, int code, t_infos *infos);
+void	put_error(char *error, char *explc, int code, t_infos *infos);
 
 //	DELETE LATER
 void	show_infos(t_infos *infos);
 void	show_map(char **map);
-void	show_position(t_position *lst);
 
 #endif
