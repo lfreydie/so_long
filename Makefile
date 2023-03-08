@@ -6,7 +6,7 @@
 #    By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 15:01:41 by lfreydie          #+#    #+#              #
-#    Updated: 2023/03/08 19:39:11 by lfreydie         ###   ########.fr        #
+#    Updated: 2023/03/08 19:44:29 by lfreydie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 CC ?= gcc
 NAME := so_long
-FLAGS += -Wall -Wextra -Werror -g
+CFLAGS += -Wall -Wextra -Werror -g
 LIB_FLAGS = -L -lmlx -lXext -lX11
 
 # -------- Directories -------- #
@@ -52,7 +52,7 @@ OBJ = $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SRC:.c=.o))
 
 $(NAME) :	$(LIBFT) $(OBJ)
 	@echo "$(BLUE) ==== Project compiling ==== $(END)"
-	@$(CC) $(FLAGS) -I $(HD_DIR) $(OBJ) $(LIBFT) $(MLX) $(LIB_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) -I $(HD_DIR) $(OBJ) $(LIBFT) $(MLX) $(LIB_FLAGS) -o $(NAME)
 	@echo "$(GREEN) ==== Project compiled ==== $(END)"
 
 $(LIBFT) :
@@ -64,7 +64,7 @@ $(LIBFT) :
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(FLAGS) -I $(HD_DIR) -I $(LIBFT_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(HD_DIR) -I $(LIBFT_DIR) -c $< -o $@
 
 # ----------- Rules ----------- #
 
