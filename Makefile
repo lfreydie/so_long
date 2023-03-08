@@ -6,15 +6,15 @@
 #    By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 15:01:41 by lfreydie          #+#    #+#              #
-#    Updated: 2023/03/03 13:49:36 by lfreydie         ###   ########.fr        #
+#    Updated: 2023/03/08 19:39:11 by lfreydie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # ---------- Project ---------- #
 
-CC = cc
-NAME = so_long
-FLAGS = -Wall -Wextra -Werror -g
+CC ?= gcc
+NAME := so_long
+FLAGS += -Wall -Wextra -Werror -g
 LIB_FLAGS = -L -lmlx -lXext -lX11
 
 # -------- Directories -------- #
@@ -64,7 +64,7 @@ $(LIBFT) :
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(FLAGS) -I $(HD_DIR) -I $(LIBFT_DIR) -c $< -o $@
+	$(CC) $(FLAGS) -I $(HD_DIR) -I $(LIBFT_DIR) -c $< -o $@
 
 # ----------- Rules ----------- #
 

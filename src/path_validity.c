@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:48:55 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/03/08 16:59:12 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/03/08 19:42:40 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_map_path(t_infos *infos)
 	int		res;
 
 	map_dup = ft_map_dup(infos);
-	res = try_paths(infos, map_dup, infos->x_p, infos->y_p);
+	res = try_paths(map_dup, infos->x_p, infos->y_p);
 	free_map(map_dup);
 	if (!res)
 		put_error(ERR_MAP, "no path", 1, infos);
