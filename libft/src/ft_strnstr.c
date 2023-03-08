@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:47:08 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/01/26 12:50:43 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:23:41 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	len_little = ft_strlen(little);
 	if (!*little)
 		return ((char *)big);
-	if ((!big && !len) || !*big)
+	if ((!big && !len) || (big && !*big))
 		return (NULL);
-	while (i + len_little <= len && big[i])
+	while (&big[i] && i + len_little <= len && big[i])
 	{
 		if (!ft_memcmp(big + i, little, len_little))
 			return ((char *)big + i);

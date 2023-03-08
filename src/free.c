@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 15:16:49 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/03/04 20:22:28 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/03/08 16:58:11 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	free_map(char **map)
 		return ;
 	else
 	{
-		while (map[y] && !map[y][0])
+		while (map[y])
 		{
 			free(map[y]);
 			y++;

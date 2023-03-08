@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:05:52 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/03/04 20:41:19 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/03/08 16:55:31 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,9 @@ t_infos	*init_infos(void)
 {
 	t_infos	*infos;
 
-	infos = malloc(sizeof(*infos));
+	infos = ft_calloc(sizeof(*infos), 1);
 	if (!infos)
 		put_error("error", NULL, 1, infos);
-	else
-	{
-		infos->map = NULL;
-		infos->x_p = 0;
-		infos->y_p = 0;
-		infos->x_max = 0;
-		infos->y_max = 0;
-		infos->collect = 0;
-	}
 	return (infos);
 }
 
@@ -41,7 +32,7 @@ char	**fill_map(int fd, char *file)
 	y = 0;
 	count_line = ft_count_line(fd);
 	line = "map";
-	map = malloc(sizeof(*map) * count_line);
+	map = ft_calloc(sizeof(*map), count_line + 1);
 	if (!map)
 		return (NULL);
 	fd = open(file, O_RDONLY);
@@ -69,6 +60,11 @@ int	ft_count_line(int fd)
 	while (line)
 	{
 		line = get_next_line(fd);
+		if (line)
+		{
+			free(line);
+			line = "file";
+		}
 		res++;
 	}
 	close(fd);
