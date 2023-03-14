@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:05:02 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/03/08 19:29:22 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/03/14 15:42:05 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	main(int ac, char **av, char **envp)
 		put_error(ERR_ARG, NULL, ERROR, NULL);
 	infos = check_map(av[1]);
 	show_infos(infos);
+	ft_game(infos);
 	free_all(infos);
 }
