@@ -6,22 +6,25 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:48:55 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/03/14 15:44:45 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:13:35 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	check_map_path(t_infos *infos)
+int	check_map_path(t_infos *infos)
 {
 	char	**map_dup;
 	int		res;
 
 	map_dup = ft_map_dup(infos);
+	if (!map_dup)
+		return (ft_putstr_fd(ERR, 2), free_infos(infos, NULL), 0);
 	res = try_paths(infos, map_dup, infos->x_p, infos->y_p);
 	free_map(map_dup);
 	if (!res)
-		put_error(ERR_MAP, "no path", 1, infos);
+		return (free_infos(infos, "no path\n"), 0);
+	return (1);
 }
 
 char	**ft_map_dup(t_infos *infos)
@@ -32,7 +35,7 @@ char	**ft_map_dup(t_infos *infos)
 	y = 0;
 	map_dup = ft_calloc(sizeof(*map_dup), infos->y_max + 1);
 	if (!map_dup)
-		put_error(ERR, NULL, 1, infos);
+		return (NULL);
 	while (&map_dup[y] && y < infos->y_max)
 	{
 		map_dup[y] = ft_strdup(infos->map[y]);

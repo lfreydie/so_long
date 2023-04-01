@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:31:41 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/03/08 17:00:40 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:32:55 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,42 @@ t_infos	*check_map(char *file)
 	int		fd;
 	t_infos	*infos;
 
-	if (!file)
-		put_error(ERR_MAP, NULL, ERROR, NULL);
-	check_file_name(file);
+	if (!check_file_name(file))
+		return (ft_error("wrong filename\n"), NULL);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		put_error(ERR_MAP, file, ERROR, NULL);
+		return (ft_error(ERR_NOP), NULL);
 	infos = init_infos();
+	if (!infos)
+		return (NULL);
 	infos->map = fill_map(fd, file);
 	if (!infos->map)
-		put_error(ERR_MAP, NULL, 1, infos);
-	check_map_shape(infos);
-	check_map_border(infos);
-	check_map_char(infos, 0, 0);
-	check_map_path(infos);
+		return (free_infos(infos, NULL), NULL);
+	if (!check_map_shape(infos))
+		return (NULL);
+	if (!check_map_border(infos))
+		return (NULL);
+	if (!check_map_char(infos, 0, 0))
+		return (NULL);
+	if (!check_map_path(infos))
+		return (NULL);
 	return (infos);
 }
 
-void	check_file_name(char *file)
+int	check_file_name(char *file)
 {
 	int	cmp;
 
 	file = ft_strrchr(file, '.');
 	if (!file)
-		put_error(ERR_MAP, file, ERROR, NULL);
+		return (0);
 	cmp = ft_memcmp(file, ".ber", ft_strlen(file));
 	if (cmp)
-		put_error(ERR_MAP, file, ERROR, NULL);
+		return (0);
+	return (1);
 }
 
-void	check_map_shape(t_infos *infos)
+int	check_map_shape(t_infos *infos)
 {
 	int	y;
 	int	x;
@@ -64,37 +70,44 @@ void	check_map_shape(t_infos *infos)
 		while (infos->map[y][x])
 			x++;
 		if (x != size_x)
-			put_error(ERR_MAP, NULL, ERROR, infos);
+			return (free_infos(infos, "Map must be rectangular\n"), 0);
 		y++;
 	}
 	infos->y_max = y;
+	if (infos->y_max > 9 || infos->x_max > 17)
+		return (free_infos(infos, "Map too big to play\n"), 0);
+	return (1);
 }
 
-void	check_map_border(t_infos *infos)
+int	check_map_border(t_infos *infos)
 {
-	char	*check;
-	int		y;
+	int	y;
+	int	x;
 
-	y = 0;
-	check = ft_memchr(infos->map[0], '1', infos->x_max);
-	if (!check)
-		put_error(ERR_MAP, NULL, 1, infos);
-	check = ft_memchr(infos->map[infos->y_max - 1], '1', infos->x_max);
-	if (!check)
-		put_error(ERR_MAP, NULL, 1, infos);
-	while (infos->map[y])
+	y = -1;
+	while (++y < infos->y_max - 1)
 	{
-		check = ft_memchr(infos->map[y], '1', 1);
-		if (!check)
-			put_error(ERR_MAP, NULL, 1, infos);
-		check = ft_memchr(infos->map[y] + (infos->x_max - 1), '1', 1);
-		if (!check)
-			put_error(ERR_MAP, NULL, 1, infos);
-		y++;
+		x = -1;
+		while (++x < infos->x_max - 1)
+		{
+			if ((y == 0 || y == infos->y_max - 1)
+				&& infos->map[y][x] != '1')
+				return (ft_printf("%d\n", infos->map[y][x]), \
+				ft_printf("x=%d, x_m=%d\n", x, infos->x_max), \
+				ft_printf("y=%d, y_m=%d\n", y, infos->y_max), \
+				free_infos(infos, "There are some leaks on walls\n"), 0);
+			if ((x == 0 || x == infos->x_max - 1)
+				&& infos->map[y][x] != '1')
+				return (ft_printf("%d\n", infos->map[y][x]), \
+				ft_printf("x=%d, x_m=%d\n", x, infos->x_max), \
+				ft_printf("y=%d, y_m=%d\n", y, infos->y_max), \
+				free_infos(infos, "There are some leaks on walls\n"), 0);
+		}
 	}
+	return (1);
 }
 
-void	check_map_char(t_infos *infos, int count_p, int count_e)
+int	check_map_char(t_infos *infos, int count_p, int count_e)
 {
 	int	x;
 	int	y;
@@ -112,11 +125,12 @@ void	check_map_char(t_infos *infos, int count_p, int count_e)
 			else if (infos->map[y][x] == 'E')
 				count_e++;
 			else if (infos->map[y][x] != '1' && infos->map[y][x] != '0')
-				put_error(ERR_MAP, "map contains false charactere\n", 1, infos);
+				return (free_infos(infos, "map contains false charactere\n"), 0);
 			x++;
 		}
 		y++;
 	}
-	if (!infos->collect || count_p != 1 || count_e != 1)
-		put_error(ERR_MAP, "map isn't correctly configure\n", 1, infos);
+	if (infos->collect == 0 || count_p != 1 || count_e != 1)
+		return (free_infos(infos, "map isn't correctly configure\n"), 0);
+	return (1);
 }
