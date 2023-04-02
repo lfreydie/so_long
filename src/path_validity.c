@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:48:55 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/01 17:13:35 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:16:01 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	try_paths(t_infos *infos, char **map_dup, int x, int y)
 {
 	if (map_dup[y][x] == 'E')
 		return (check_exit_possible(infos, map_dup));
-	else if (map_dup[y][x] == '1')
+	else if (map_dup[y][x] == '1' || map_dup[y][x] == 'M')
 		return (0);
 	else
 	{

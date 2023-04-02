@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:31:41 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/01 18:32:55 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:14:45 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ int	check_map_char(t_infos *infos, int count_p, int count_e)
 				count_p += take_coordinate_perso(infos, x, y);
 			else if (infos->map[y][x] == 'E')
 				count_e++;
-			else if (infos->map[y][x] != '1' && infos->map[y][x] != '0')
+			else if (infos->map[y][x] != '1' && infos->map[y][x] != '0' \
+			&& infos->map[y][x] != 'M')
 				return (free_infos(infos, "map contains false charactere\n"), 0);
 			x++;
 		}

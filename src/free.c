@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 15:16:49 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/01 18:29:22 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/02 17:34:52 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ void	free_map(char **map)
 	}
 }
 
+void	ft_destroy_img(t_data *game)
+{
+	if (game->img_0)
+		mlx_destroy_image(game->mlx_ptr, game->img_0);
+	if (game->img_1)
+		mlx_destroy_image(game->mlx_ptr, game->img_1);
+	if (game->img_p)
+		mlx_destroy_image(game->mlx_ptr, game->img_p);
+	if (game->img_c)
+		mlx_destroy_image(game->mlx_ptr, game->img_c);
+	if (game->img_e)
+		mlx_destroy_image(game->mlx_ptr, game->img_e);
+	if (game->img_z)
+		mlx_destroy_image(game->mlx_ptr, game->img_z);
+}
+
 void	free_data(t_data *game, char *err)
 {
 	if (err)
@@ -54,6 +70,7 @@ void	free_data(t_data *game, char *err)
 	}
 	if (game)
 	{
+		ft_destroy_img(game);
 		if (game->infos)
 			free_infos(game->infos, NULL);
 		if (game->win_ptr)
@@ -65,4 +82,18 @@ void	free_data(t_data *game, char *err)
 		}
 		free(game);
 	}
+}
+
+int	ft_exit(t_data *game, char *msg, int err)
+{
+	free_data(game, NULL);
+	if (err)
+	{
+		ft_putstr_fd(msg, 2);
+		if (msg)
+			ft_putstr_fd(msg, 2);
+	}
+	else
+		ft_putstr_fd(msg, 1);
+	exit (1);
 }
