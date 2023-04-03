@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:26:52 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/02 18:34:02 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:36:21 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int		take_coordinate_perso(t_infos *infos, int x, int y);
 //	PATH_VALIDITY
 int		check_map_path(t_infos *infos);
 char	**ft_map_dup(t_infos *infos);
-int		try_paths(t_infos *infos, char **map_dup, int x, int y);
+int		try_paths_to_collect(t_infos *infos, char **map_dup, int x, int y);
+int		try_paths_to_exit(t_infos *infos, char **map_dup, int x, int y);
 int		check_exit_possible(t_infos *infos, char **map);
 
 //	GAME
@@ -86,6 +87,7 @@ void	ft_init_img(t_data *game);
 void	ft_put_img_to_win(t_data *game, int x, int y);
 void	ft_place_img(t_data *game);
 void	ft_open_exit(t_data *game);
+void	ft_put_count_to_win(t_data *game);
 
 //	EVENT
 int		ft_listen_event(int keysym, t_data *game);

@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:48:55 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/02 18:16:01 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:37:19 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@ int	check_map_path(t_infos *infos)
 	map_dup = ft_map_dup(infos);
 	if (!map_dup)
 		return (ft_putstr_fd(ERR, 2), free_infos(infos, NULL), 0);
-	res = try_paths(infos, map_dup, infos->x_p, infos->y_p);
+	res = try_paths_to_collect(infos, map_dup, infos->x_p, infos->y_p);
+	free_map(map_dup);
+	if (!res)
+		return (free_infos(infos, "no path\n"), 0);
+	map_dup = ft_map_dup(infos);
+	if (!map_dup)
+		return (ft_putstr_fd(ERR, 2), free_infos(infos, NULL), 0);
+	res = try_paths_to_exit(infos, map_dup, infos->x_p, infos->y_p);
 	free_map(map_dup);
 	if (!res)
 		return (free_infos(infos, "no path\n"), 0);
@@ -44,22 +51,48 @@ char	**ft_map_dup(t_infos *infos)
 	return (map_dup);
 }
 
-int	try_paths(t_infos *infos, char **map_dup, int x, int y)
+int	try_paths_to_collect(t_infos *infos, char **map_dup, int x, int y)
 {
-	if (map_dup[y][x] == 'E')
-		return (check_exit_possible(infos, map_dup));
+	if (check_exit_possible(infos, map_dup))
+		return (1);
 	else if (map_dup[y][x] == '1' || map_dup[y][x] == 'M')
 		return (0);
 	else
 	{
 		map_dup[y][x] = '1';
-		if (try_paths(infos, map_dup, x, y + 1))
+		if (try_paths_to_collect(infos, map_dup, x, y + 1))
 			return (1);
-		else if (try_paths(infos, map_dup, x + 1, y))
+		else if (try_paths_to_collect(infos, map_dup, x + 1, y))
 			return (1);
-		else if (try_paths(infos, map_dup, x, y - 1))
+		else if (try_paths_to_collect(infos, map_dup, x, y - 1))
 			return (1);
-		else if (try_paths(infos, map_dup, x - 1, y))
+		else if (try_paths_to_collect(infos, map_dup, x - 1, y))
+			return (1);
+		else
+		{
+			map_dup[y][x] = '0';
+			return (0);
+		}
+	}
+	return (1);
+}
+
+int	try_paths_to_exit(t_infos *infos, char **map_dup, int x, int y)
+{
+	if (map_dup[y][x] == 'E')
+		return (1);
+	else if (map_dup[y][x] == '1' || map_dup[y][x] == 'M')
+		return (0);
+	else
+	{
+		map_dup[y][x] = '1';
+		if (try_paths_to_exit(infos, map_dup, x, y + 1))
+			return (1);
+		else if (try_paths_to_exit(infos, map_dup, x + 1, y))
+			return (1);
+		else if (try_paths_to_exit(infos, map_dup, x, y - 1))
+			return (1);
+		else if (try_paths_to_exit(infos, map_dup, x - 1, y))
 			return (1);
 		else
 		{

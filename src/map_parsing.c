@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:31:41 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/02 18:14:45 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:20:36 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,10 @@ int	check_map_border(t_infos *infos)
 		{
 			if ((y == 0 || y == infos->y_max - 1)
 				&& infos->map[y][x] != '1')
-				return (ft_printf("%d\n", infos->map[y][x]), \
-				ft_printf("x=%d, x_m=%d\n", x, infos->x_max), \
-				ft_printf("y=%d, y_m=%d\n", y, infos->y_max), \
-				free_infos(infos, "There are some leaks on walls\n"), 0);
+				return (free_infos(infos, "There are some leaks on walls\n"), 0);
 			if ((x == 0 || x == infos->x_max - 1)
 				&& infos->map[y][x] != '1')
-				return (ft_printf("%d\n", infos->map[y][x]), \
-				ft_printf("x=%d, x_m=%d\n", x, infos->x_max), \
-				ft_printf("y=%d, y_m=%d\n", y, infos->y_max), \
-				free_infos(infos, "There are some leaks on walls\n"), 0);
+				return (free_infos(infos, "There are some leaks on walls\n"), 0);
 		}
 	}
 	return (1);

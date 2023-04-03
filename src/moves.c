@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 16:12:03 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/02 18:00:51 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:20:14 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_move(t_data *game, int diff_x, int diff_y)
 		if (game->infos->map[new_y][new_x] == 'E' && !game->infos->collect)
 		{
 			ft_remove_p(game);
-			ft_exit(game, "YOU WON !\n", 0);
+			ft_exit(game, "\nYOU WON !\n", 0);
 		}
 		else if (game->infos->map[new_y][new_x] == 'C')
 			ft_move_p(game, new_x, new_y);
@@ -34,7 +34,8 @@ void	ft_move(t_data *game, int diff_x, int diff_y)
 		{
 			ft_die(game, new_x, new_y);
 			ft_remove_p(game);
-			ft_exit(game, "YOU LOST !\n", 0);
+			ft_place_img(game);
+			ft_exit(game, "\nYOU LOST !\n", 0);
 		}
 	}
 }
@@ -51,12 +52,14 @@ void	ft_move_p(t_data *game, int new_x, int new_y)
 	game->infos->map[new_y][new_x] = 'P';
 	take_coordinate_perso(game->infos, new_x, new_y);
 	game->infos->count_step++;
-	ft_printf("step: %d\n", game->infos->count_step);
+	ft_put_count_to_win(game);
+	ft_printf("\rstep: %d", game->infos->count_step);
 }
 
 void	ft_remove_p(t_data *game)
 {
 	game->infos->map[game->infos->y_p][game->infos->x_p] = '0';
 	game->infos->count_step++;
-	ft_printf("step: %d\n", game->infos->count_step);
+	ft_put_count_to_win(game);
+	ft_printf("\rstep: %d", game->infos->count_step);
 }

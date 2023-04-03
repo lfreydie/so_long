@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 15:16:49 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/02 17:34:52 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:59:36 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	ft_exit(t_data *game, char *msg, int err)
 	free_data(game, NULL);
 	if (err)
 	{
-		ft_putstr_fd(msg, 2);
+		ft_putstr_fd(ERR, 2);
 		if (msg)
 			ft_putstr_fd(msg, 2);
 	}
