@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:05:52 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/04 12:18:52 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:59:10 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**fill_map(int fd, char *file)
 	if (!map)
 		return (ft_putstr_fd(ERR, 2), NULL);
 	fd = open(file, O_RDONLY);
-	if (fd < 0)
+	if (fd != 0)
 		return (ft_error(ERR_NOP), free_map(map), NULL);
 	while (y < count_line)
 	{

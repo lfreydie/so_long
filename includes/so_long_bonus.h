@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:26:52 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/04 12:07:48 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:01:31 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
+#ifndef SO_LONG_BONUS_H
 
-# define SO_LONG_H
+# define SO_LONG_BONUS_H
 
 # include "mlx.h"
 # include "mlx_int.h"
+# include <X11/keysym.h>
+# include <X11/X.h>
 # include "libft.h"
 # include <stdio.h>
 # include <errno.h>
-# include <math.h>
-# include <time.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
+# include <unistd.h>
+# include <string.h>
+# include <fcntl.h>
 
 typedef struct s_infos
 {
@@ -53,7 +60,7 @@ typedef struct s_data
 # define ERR "Error\n"
 # define ERR_ARG "Invalid number of arguments\n"
 # define ERR_ENV "Environnement error\n"
-# define ERR_NOP "The file doesn't open\n"
+# define ERR_NOP "The file doesn't open or isn't a file\n"
 # define ERR_MAP "Map error\n"
 # define ERR_MLX "Minilibx error\n"
 # define ERR_IMG "Image error\n"
@@ -111,9 +118,5 @@ int		ft_exit(t_data *game, char *msg, int err);
 
 //	ERROR
 void	ft_error(char *error);
-
-//	DELETE LATER
-void	show_infos(t_infos *infos);
-void	show_map(char **map);
 
 #endif

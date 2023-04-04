@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 18:31:41 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/04 13:14:28 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:00:32 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_infos	*check_map(char *file)
 	if (!check_file_name(file))
 		return (ft_error("wrong filename\n"), NULL);
 	fd = open(file, O_RDONLY);
-	if (fd < 0)
+	if (fd != 0)
 		return (ft_error(ERR_NOP), NULL);
 	infos = init_infos();
 	if (!infos)
@@ -41,11 +41,19 @@ t_infos	*check_map(char *file)
 
 int	check_file_name(char *file)
 {
+	int	len;
 	int	cmp;
 
+	len = ft_strlen(file);
 	file = ft_strchr(file, '.');
 	if (!file)
 		return (0);
+	if ((int)ft_strlen(file) == len && len > 4)
+	{
+		file = ft_strchr(file + 1, '.');
+		if (!file)
+			return (0);
+	}
 	cmp = ft_memcmp(file, ".ber", 5);
 	if (cmp != 0)
 		return (0);

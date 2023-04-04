@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 18:57:19 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/04 12:18:49 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:39:30 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_data	*ft_init_game(t_infos *infos)
 	game->img_s = 150;
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
-		return (free_data(game, ERR_MLX), NULL);
+		return (free_data(game, ERR_ENV), NULL);
 	game->win_ptr = mlx_new_window(game->mlx_ptr, \
 	infos->x_max * game->img_s, infos->y_max * game->img_s, "so_long");
 	if (!game->win_ptr)
