@@ -6,7 +6,7 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:26:52 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/04 12:26:26 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/04 12:07:48 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ t_data	*ft_init_game(t_infos *infos);
 void	ft_init_img(t_data *game);
 void	ft_put_img_to_win(t_data *game, int x, int y);
 void	ft_place_img(t_data *game);
+void	ft_open_exit(t_data *game);
+void	ft_put_count_to_win(t_data *game);
 
 //	EVENT
 int		ft_listen_event(int keysym, t_data *game);
@@ -96,6 +98,10 @@ void	ft_move(t_data *game, int diff_x, int diff_y);
 void	ft_move_p(t_data *game, int new_x, int new_y);
 void	ft_remove_p(t_data *game);
 
+//	ANIM
+void	ft_die(t_data *game, int new_x, int new_y);
+char	*ft_die_path(t_data *game);
+
 //	FREE
 void	free_infos(t_infos *infos, char *err);
 void	free_map(char **map);
@@ -105,5 +111,9 @@ int		ft_exit(t_data *game, char *msg, int err);
 
 //	ERROR
 void	ft_error(char *error);
+
+//	DELETE LATER
+void	show_infos(t_infos *infos);
+void	show_map(char **map);
 
 #endif

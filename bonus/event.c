@@ -6,11 +6,11 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 15:56:28 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/04 12:10:46 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/04 12:32:29 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 int	ft_listen_event(int keysym, t_data *game)
 {
@@ -41,7 +41,7 @@ int	ft_listen_event(int keysym, t_data *game)
 
 int	ft_stop_game(t_data *game)
 {
-	ft_putstr_fd("\nYou stopped playing\n", 1);
+	ft_putstr_fd("You stopped playing\n", 1);
 	ft_exit(game, NULL, 0);
 	return (1);
 }

@@ -6,11 +6,11 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 15:16:49 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/04 11:58:22 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/04 12:18:45 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 void	free_infos(t_infos *infos, char *err)
 {

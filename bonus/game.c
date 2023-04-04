@@ -6,11 +6,11 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 18:57:19 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/04 12:29:53 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/04 12:18:49 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 void	ft_game(t_infos *infos)
 {
@@ -21,7 +21,6 @@ void	ft_game(t_infos *infos)
 		return ;
 	ft_init_img(game);
 	ft_place_img(game);
-	ft_printf("\rstep: %d", game->infos->count_step);
 	mlx_hook(game->win_ptr, DestroyNotify, StructureNotifyMask, \
 	&ft_exit, game);
 	mlx_hook(game->win_ptr, KeyPress, KeyPressMask, &ft_listen_event, game);

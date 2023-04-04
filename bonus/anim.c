@@ -6,11 +6,11 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 18:10:35 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/03 15:20:09 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/04 12:48:12 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 void	ft_die(t_data *game, int new_x, int new_y)
 {
@@ -18,7 +18,7 @@ void	ft_die(t_data *game, int new_x, int new_y)
 
 	while (++game->sprite_z <= 24)
 	{
-		zombie_path = ft_die_path(game, zombie_path);
+		zombie_path = ft_die_path(game);
 		if (!zombie_path)
 			ft_exit(game, NULL, 1);
 		mlx_destroy_image(game->mlx_ptr, game->img_z);
@@ -29,16 +29,18 @@ void	ft_die(t_data *game, int new_x, int new_y)
 			free(zombie_path);
 			ft_exit(game, ERR_IMG, 1);
 		}
+		usleep(20000);
 		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
 		game->img_z, new_x * game->img_s, new_y * game->img_s);
 		free(zombie_path);
 	}
 }
 
-char	*ft_die_path(t_data *game, char *zombie_path)
+char	*ft_die_path(t_data *game)
 {
 	char	*nbr;
 	char	*tmp;
+	char	*zombie_path;
 
 	nbr = malloc(sizeof(char) * 3);
 	if (!nbr)

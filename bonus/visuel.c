@@ -6,11 +6,11 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 15:23:15 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/04 12:25:45 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/04 12:19:09 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 void	ft_init_img(t_data *game)
 {
@@ -35,7 +35,7 @@ void	ft_init_img(t_data *game)
 	if (!game->img_c)
 		ft_exit(game, ERR_IMG, 1);
 	game->img_e = mlx_xpm_file_to_image(game->mlx_ptr, \
-	"./img/CHEST_OPEN.xpm", &game->img_s, &game->img_s);
+	"./img/CHEST_CLOSED.xpm", &game->img_s, &game->img_s);
 	if (!game->img_e)
 		ft_exit(game, ERR_IMG, 1);
 }
@@ -72,6 +72,30 @@ void	ft_place_img(t_data *game)
 	{
 		x = -1;
 		while (++x < game->infos->x_max)
+		{
 			ft_put_img_to_win(game, x, y);
+			if (y == 0 && x == 0)
+				ft_put_count_to_win(game);
+		}
 	}
+}
+
+void	ft_open_exit(t_data *game)
+{
+	if (game->img_e)
+		mlx_destroy_image(game->mlx_ptr, game->img_e);
+	game->img_e = mlx_xpm_file_to_image(game->mlx_ptr, \
+	"./img/CHEST_OPEN.xpm", &game->img_s, &game->img_s);
+	if (!game->img_e)
+		ft_exit(game, ERR_IMG, 1);
+}
+
+void	ft_put_count_to_win(t_data *game)
+{
+	char	*count;
+
+	count = ft_itoa(game->infos->count_step);
+	mlx_string_put(game->mlx_ptr, game->win_ptr, 5, 22, 0x3a3232, "count :");
+	mlx_string_put(game->mlx_ptr, game->win_ptr, 50, 22, 0x3a3232, count);
+	free(count);
 }

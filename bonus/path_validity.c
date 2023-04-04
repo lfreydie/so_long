@@ -6,11 +6,11 @@
 /*   By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:48:55 by lfreydie          #+#    #+#             */
-/*   Updated: 2023/04/04 12:22:06 by lfreydie         ###   ########.fr       */
+/*   Updated: 2023/04/04 12:19:05 by lfreydie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 int	check_map_path(t_infos *infos)
 {
@@ -55,7 +55,7 @@ int	try_paths_to_collect(t_infos *infos, char **map_dup, int x, int y)
 {
 	if (check_exit_possible(infos, map_dup))
 		return (1);
-	else if (map_dup[y][x] == '1')
+	else if (map_dup[y][x] == '1' || map_dup[y][x] == 'M')
 		return (0);
 	else
 	{
@@ -81,7 +81,7 @@ int	try_paths_to_exit(t_infos *infos, char **map_dup, int x, int y)
 {
 	if (map_dup[y][x] == 'E')
 		return (1);
-	else if (map_dup[y][x] == '1')
+	else if (map_dup[y][x] == '1' || map_dup[y][x] == 'M')
 		return (0);
 	else
 	{
