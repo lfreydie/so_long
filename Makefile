@@ -6,7 +6,7 @@
 #    By: lfreydie <lfreydie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 15:01:41 by lfreydie          #+#    #+#              #
-#    Updated: 2023/04/06 12:40:30 by lfreydie         ###   ########.fr        #
+#    Updated: 2023/04/06 13:04:18 by lfreydie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,4 +107,4 @@ scan :
 
 re :	fclean all
 
-.PHONY : all clean fclean scan re
+.PHONY : all bonus clean fclean scan re
